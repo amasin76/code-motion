@@ -23,6 +23,12 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-error-boundary:
+    specifier: ^4.0.13
+    version: 4.0.13(react@18.2.0)
+  react-router-dom:
+    specifier: ^6.22.2
+    version: 6.22.2(react-dom@18.2.0)(react@18.2.0)
   tailwind-merge:
     specifier: ^2.2.1
     version: 2.2.1
@@ -673,6 +679,11 @@ packages:
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.63)(react@18.2.0)
       '@types/react': 18.2.63
       react: 18.2.0
+    dev: false
+
+  /@remix-run/router@1.15.2:
+    resolution: {integrity: sha512-+Rnav+CaoTE5QJc4Jcwh5toUpnVLKYbpU6Ys0zqbakqbaLQHeglLVHPfxOiQqdNmUy5C2lXz5dwC6tQNX2JW2Q==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /@rollup/rollup-android-arm-eabi@4.12.0:
@@ -2593,6 +2604,15 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-error-boundary@4.0.13(react@18.2.0):
+    resolution: {integrity: sha512-b6PwbdSv8XeOSYvjt8LpgpKrZ0yGdtZokYwkwV2wlcZbxgopHX/hgPl5VgpnoVOWd868n1hktM8Qm4b+02MiLQ==}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.24.0
+      react: 18.2.0
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
@@ -2601,6 +2621,29 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-router-dom@6.22.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-WgqxD2qySEIBPZ3w0sHH+PUAiamDeszls9tzqMPBDA1YYVucTBXLU7+gtRfcSnhe92A3glPnvSxK2dhNoAVOIQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.15.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router: 6.22.2(react@18.2.0)
+    dev: false
+
+  /react-router@6.22.2(react@18.2.0):
+    resolution: {integrity: sha512-YD3Dzprzpcq+tBMHBS822tCjnWD3iIZbTeSXMY9LPSG541EfoBGyZ3bS25KEnaZjLcmQpw2AVLkFyfgXY8uvcw==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.15.2
+      react: 18.2.0
+    dev: false
 
   /react@18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
