@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ChevronDownIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { Github, ScanText } from 'lucide-react';
+import { ModeToggle } from '@/components/mode-toggle';
 import {
   Accordion,
   AccordionContent,
@@ -209,6 +210,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
+            <ModeToggle />
           </div>
           <nav className="flex items-center space-x-2">
             <a
