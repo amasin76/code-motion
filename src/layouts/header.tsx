@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ChevronDownIcon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import {
+  ChevronDownIcon,
+  GitHubLogoIcon,
+  HamburgerMenuIcon,
+} from '@radix-ui/react-icons';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-import { Github, ScanText } from 'lucide-react';
+import logo from '@/assets/code-motion.png';
 import { ModeToggle } from '@/components/mode-toggle';
 import {
   Accordion,
@@ -33,7 +37,7 @@ export function Header() {
       <div className="container px-4 md:px-8 flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <NavLink to="/" className="mr-6 flex items-center space-x-2">
-            <ScanText className="h-6 w-6" />
+            <img src={logo} alt="logo" width={35} />
           </NavLink>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {mainMenu.map((menu, index) =>
@@ -113,7 +117,7 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="flex items-center space-x-2"
             >
-              <ScanText className="h-6 w-6" />
+              <img src={logo} alt="logo" width={35} />
             </NavLink>
             <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-8 pl-8">
               <Accordion
@@ -203,15 +207,15 @@ export function Header() {
           </SheetContent>
         </Sheet>
         <a href="/" className="mr-6 flex items-center space-x-2 md:hidden">
-          <ScanText className="h-6 w-6" />
+          <img src={logo} alt="logo" width={35} />
           <span className="font-bold inline-block">Code Motion</span>
         </a>
         {/* right */}
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
-            <ModeToggle />
           </div>
+          <ModeToggle />
           <nav className="flex items-center space-x-2">
             <a
               href="https://github.com/amasin76/code-motion"
@@ -227,7 +231,7 @@ export function Header() {
                   'w-9 px-0'
                 )}
               >
-                <Github className="h-4 w-4" />
+                <GitHubLogoIcon className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </div>
             </a>
