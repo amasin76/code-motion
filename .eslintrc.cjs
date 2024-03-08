@@ -41,8 +41,6 @@ module.exports = {
               ['^\\u0000'],
               // Relative imports (including parent and same-folder)
               ['^\\.\\.(?!/?$|^\\./?$)', '^\\./(?=.*/)(?!/?$)'],
-              // Style imports.
-              ['^.+\\.?(css)$'],
             ],
           },
         ],

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import { routeList } from '@/data/constant/navs';
 import LayoutComponent from '@/layouts';
+import Studio from '@/pages/studio';
 
 const Home = lazy(() => import('@/pages/home'));
 const NotFound = lazy(() => import('@/pages/not-found'));
@@ -14,6 +14,10 @@ const routes = [
       {
         path: '',
         element: <Home />,
+      },
+      {
+        path: 'studio',
+        element: <Studio />,
       },
       {
         path: '*',
