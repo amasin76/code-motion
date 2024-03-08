@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 
 const NotFound = () => {
   return (
@@ -11,9 +11,15 @@ const NotFound = () => {
         </span>
         4
       </h1>
-      <p className="text-base leading-loose ">Page not found.</p>
-      <NavLink to="/" className="mt-10">
-        <Button variant="secondary">Go Back to Home</Button>
+      <h1 className="text-3xl font-semibold">Oops! Page not found</h1>
+      <p className="text-sm text-muted-foreground">
+        We are sorry, but the page you requested was not found
+      </p>
+      <NavLink
+        to="/"
+        className={`mt-12 ${buttonVariants({ variant: 'secondary' })}`}
+      >
+        Back to Home
       </NavLink>
     </div>
   );
