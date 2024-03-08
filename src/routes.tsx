@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LayoutComponent from '@/layouts';
-import Studio from '@/pages/studio';
 
 const Home = lazy(() => import('@/pages/home'));
+const Studio = lazy(() => import('@/pages/studio'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 
 const routes = [

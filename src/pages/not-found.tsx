@@ -3,7 +3,7 @@ import { buttonVariants } from '@/components/ui/button';
 
 const NotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <main className="min-h-[calc(100vh-57px)] flex flex-col items-center justify-center">
       <h1 className="text-5xl font-bold mb-4">
         4
         <span role="img" aria-label="Crying Face">
@@ -21,7 +21,7 @@ const NotFound = () => {
       >
         Back to Home
       </NavLink>
-    </div>
+    </main>
   );
 };
 

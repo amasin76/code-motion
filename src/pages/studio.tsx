@@ -1,7 +1,6 @@
+import Editor from '@/components/studio/editor';
+import Slides from '@/components/studio/slides';
 import { Language } from '@/utils/languages';
-
-import Editor from './editor';
-import Slides from './slides';
 
 interface StudioProps {}
 

@@ -2,7 +2,6 @@ function Slides() {
   return (
     <>
       <h2 className="text-xl font-bold mb-4">Snapshots</h2>
-      {/* Placeholder for Snapshots list - Replace with your component */}
       <ul className="space-y-2">
         <li>Snapshot 1</li>
         <li>Snapshot 2</li>
