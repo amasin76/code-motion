@@ -21,7 +21,7 @@ function EditorWindow() {
           <div className="w-3 h-3 bg-red-400 rounded-full"></div>
         </div>
       </div>
-      <div className="flex-grow overflow-auto">
+      <div className="flex-grow px-1 pb-1 overflow-auto">
         <Editor
           value="let str = 'bio'"
           language={Language.jsx}

@@ -22,7 +22,7 @@ const Studio: React.FC<StudioProps> = () => {
         collapsedSize={0}
         minSize={5}
       >
-        <aside className="h-full dark:bg-gradient-to-b from-slate-950 to-slate-900 border border-right flex flex-col items-center">
+        <aside className="h-full dark:bg-gradient-to-b from-slate-950 to-slate-900 border border-right">
           <Slides />
         </aside>
       </ResizablePanel>
