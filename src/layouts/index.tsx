@@ -22,7 +22,7 @@ const LayoutComponent = () => {
             <Outlet />
           </Suspense>
         </ErrorBoundary>
-        <div className="fixed bottom-4 right-4">
+        <div className="fixed bottom-2 right-2">
           <ModeToggle />
         </div>
       </div>
