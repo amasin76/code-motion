@@ -19,9 +19,8 @@ const theme = EditorView.theme({
   '&': {
     fontSize: '150%',
     height: '100%',
+    paddingLeft: '.5rem',
   },
-  '.cm-editor': { height: '100%' },
-  '.cm-scroller': { overflow: 'auto' },
 });
 
 const extensionsCompartment = new Compartment();
