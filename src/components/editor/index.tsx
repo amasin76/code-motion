@@ -1,8 +1,31 @@
+import { useCallback } from 'react';
+import { getSnapshotAtTime } from '@/core/doc/raw-doc';
+import { useStore } from '@/store';
 import { Language } from '@/utils/languages';
 
 import Editor from './editor';
 
 function EditorWindow() {
+  const { doc, currentTime, updateSnapshot } = useStore((state) => ({
+    doc: state.doc,
+    currentTime: state.currentTime,
+    updateSnapshot: state.updateSnapshot,
+  }));
+
+  const [currentSnapshotIndex] = getSnapshotAtTime(doc, currentTime);
+
+  const currentSnapShot = doc?.snapshots[currentSnapshotIndex];
+
+  const handleCodeUpdate = useCallback(
+    (code: string) => {
+      updateSnapshot(currentSnapshotIndex, {
+        ...currentSnapShot,
+        code,
+      });
+    },
+    [currentSnapShot, currentSnapshotIndex, updateSnapshot]
+  );
+
   return (
     <div className="max-w-[60rem] max-h-[60rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col">
       <div className="h-9 rounded-t-lg grid grid-cols-3 items-center px-4 z-10">
@@ -23,12 +46,10 @@ function EditorWindow() {
       </div>
       <div className="flex-grow px-1 pb-1 overflow-auto">
         <Editor
-          value="let str = 'bio'"
-          language={Language.jsx}
+          value={currentSnapShot?.code || ''}
+          language={doc.language || Language.tsx}
           className="h-full"
-          onChange={() => {
-            return null;
-          }}
+          onChange={handleCodeUpdate}
         />
       </div>
     </div>
