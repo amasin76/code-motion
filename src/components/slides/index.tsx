@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Reorder } from 'framer-motion';
 import { PlusIcon, RotateCcwIcon, TrashIcon } from 'lucide-react';
+import Divider from '@/components/common/Divider';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { useStore } from '@/store';
 
 function Slides() {
   const [items, setItems] = useState([1, 2, 3]);
+
+  const { gotoSnapshot } = useStore();
 
   return (
     <ScrollArea className="w-full h-[calc(100vh-59px)] overflow-y-auto">
@@ -19,6 +23,9 @@ function Slides() {
             className="rounded bg-slate-800/50"
             key={item}
             value={item}
+            onClick={() => {
+              gotoSnapshot(idx);
+            }}
           >
             <div className="group relative cursor-grab">
               <button className="absolute z-10 hidden group-hover:block top-2 right-2 text-white bg-zinc-600/70 px-1 rounded-md cursor-pointer">
@@ -31,22 +38,8 @@ function Slides() {
             </div>
           </Reorder.Item>
         ))}
-        <div className="w-full flex gap-4">
-          <Button
-            className="w-full rounded"
-            variant={'secondary'}
-            title="Add Slide"
-          >
-            <PlusIcon className="text-slate-400" />
-          </Button>
-          <Button
-            className="w-full rounded"
-            variant={'secondary'}
-            title="Delete All"
-          >
-            <RotateCcwIcon className="text-slate-400" />
-          </Button>
-        </div>
+        <Divider />
+        <SlidesActions />
       </Reorder.Group>
       <ScrollBar orientation="vertical" />
     </ScrollArea>
@@ -54,3 +47,24 @@ function Slides() {
 }
 
 export default Slides;
+
+function SlidesActions() {
+  return (
+    <div className="w-full flex flex-wrap gap-4">
+      <Button
+        className="px-3 grow rounded"
+        variant={'secondary'}
+        title="Add Slide"
+      >
+        <PlusIcon className="w-5 text-slate-400" />
+      </Button>
+      <Button
+        className="px-3 grow rounded"
+        variant={'secondary'}
+        title="Delete All"
+      >
+        <RotateCcwIcon className="w-5 text-slate-400" />
+      </Button>
+    </div>
+  );
+}

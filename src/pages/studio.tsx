@@ -20,7 +20,7 @@ const Studio: React.FC<StudioProps> = () => {
         defaultSize={12}
         collapsible={true}
         collapsedSize={0}
-        minSize={5}
+        minSize={6}
       >
         <aside className="h-full dark:bg-gradient-to-b from-slate-950 to-slate-900 border border-right">
           <Slides />
