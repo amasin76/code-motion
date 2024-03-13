@@ -12,6 +12,8 @@ function EditorWindow() {
     updateSnapshot: state.updateSnapshot,
   }));
 
+  const deleteSnapshot = useStore((state) => state.deleteSnapshot);
+
   const [currentSnapshotIndex] = getSnapshotAtTime(doc, currentTime);
 
   const currentSnapShot = doc?.snapshots[currentSnapshotIndex];
@@ -39,9 +41,15 @@ function EditorWindow() {
           />
         </div>
         <div className="flex justify-end">
-          <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
-          <div className="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
-          <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+          <button className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></button>
+          <button className="w-3 h-3 bg-green-400 rounded-full mr-2"></button>
+          <button
+            className="w-3 h-3 bg-red-400 rounded-full"
+            onClick={() => {
+              console.log(currentSnapShot);
+              currentSnapShot.id > 1 && deleteSnapshot(currentSnapShot.id - 1);
+            }}
+          ></button>
         </div>
       </div>
       <div className="flex-grow px-1 pb-1 overflow-auto">
