@@ -20,7 +20,7 @@ export interface AppSliceState {
 
 export const initialState: AppSliceState = {
   doc: {
-    language: Language.jsx,
+    language: Language.javascript,
     fontSize: 30,
     lineHeight: 42,
     width: 1280,
@@ -33,23 +33,21 @@ export const initialState: AppSliceState = {
     },
     snapshots: [
       {
-        id: 1,
+        id: '1',
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
           export function Demo({ active }) {
             return (
               <div
-                className={\`demo $${
-                  /* workaround for bug of `dedent` */ ''
-                }{active ? 'active' : ''}\`}
+                className={\`demo \${active ? 'active' : ''}\`}
               ></div>
             )
           }
         `,
       },
       {
-        id: 2,
+        id: '2',
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
@@ -57,16 +55,14 @@ export const initialState: AppSliceState = {
           export function Demo({ active }) {
             return (
               <div
-              className={\`demo $${
-                /* workaround for bug of `dedent` */ ''
-              }{active ? 'active' : ''}\`}
+                className={\`demo \${active ? 'active' : ''}\`}
               ></div>
             )
           }
       `,
       },
       {
-        id: 3,
+        id: '3',
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
@@ -172,7 +168,7 @@ export const createAppSlice: StateCreator<
       const snapshot = state.doc.snapshots[index];
       const newSnapshot = {
         ...snapshot,
-        id: Date.now(),
+        id: String(Date.now()),
       };
       const snapshots = updateArrayAt(
         state.doc.snapshots,

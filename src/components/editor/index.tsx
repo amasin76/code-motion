@@ -1,7 +1,11 @@
 import { useCallback } from 'react';
+import { CodeIcon, PlaySquareIcon } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getSnapshotAtTime } from '@/core/doc/raw-doc';
 import { useStore } from '@/store';
 import { Language } from '@/utils/languages';
+
+import Preview from '../preview';
 
 import Editor from './editor';
 
@@ -29,13 +33,25 @@ function EditorWindow() {
   );
 
   return (
-    <div className="max-w-[60rem] max-h-[60rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col">
+    <Tabs
+      defaultValue="editor"
+      className="max-w-[60rem] max-h-[60rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col"
+    >
       <div className="h-9 rounded-t-lg grid grid-cols-3 items-center px-4 z-10">
-        <div>{/* TODO: add font-size, theme */}</div>
+        <div>
+          <TabsList className="h-fit gap-2 bg-zinc-800 z-50">
+            <TabsTrigger value="editor">
+              <CodeIcon />
+            </TabsTrigger>
+            <TabsTrigger value="preview">
+              <PlaySquareIcon />
+            </TabsTrigger>
+          </TabsList>
+        </div>
         <div className="justify-center inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 ring-gray-800">
           <input
             className="bg-transparent focus:border-none focus:outline-none text-center"
-            value="Code.tsx"
+            defaultValue="Code.tsx"
             type="text"
             spellCheck="false"
           />
@@ -46,21 +62,26 @@ function EditorWindow() {
           <button
             className="w-3 h-3 bg-red-400 rounded-full"
             onClick={() => {
-              console.log(currentSnapShot);
-              currentSnapShot.id > 1 && deleteSnapshot(currentSnapShot.id - 1);
+              +currentSnapShot.id > 1 &&
+                deleteSnapshot(+currentSnapShot.id - 1);
             }}
           ></button>
         </div>
       </div>
       <div className="flex-grow px-1 pb-1 overflow-auto">
-        <Editor
-          value={currentSnapShot?.code || ''}
-          language={doc.language || Language.tsx}
-          className="h-full"
-          onChange={handleCodeUpdate}
-        />
+        <TabsContent value="editor" className="h-full">
+          <Editor
+            value={currentSnapShot?.code || ''}
+            language={doc.language || Language.jsx}
+            className="h-full"
+            onChange={handleCodeUpdate}
+          />
+        </TabsContent>
+        <TabsContent value="preview">
+          <Preview />
+        </TabsContent>
       </div>
-    </div>
+    </Tabs>
   );
 }
 

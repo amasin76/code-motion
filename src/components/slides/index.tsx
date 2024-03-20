@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion, Reorder } from 'framer-motion';
 import { PlusIcon, RotateCcwIcon, TrashIcon } from 'lucide-react';
-import Divider from '@/components/common/Divider';
 import { Button } from '@/components/ui/button';
+import Divider from '@/components/ui/Divider';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { DocSnapshot, getSnapshotAtTime } from '@/core/doc/raw-doc';
 import { useStore } from '@/store';
