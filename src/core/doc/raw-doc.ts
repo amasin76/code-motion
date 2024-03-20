@@ -1,14 +1,9 @@
-import { type Language } from '@/utils/languages';
-
-// import { type ThemeName } from '../theme/index';
+import { type Language } from '../code-lang/languages';
+import { type ThemeName } from '../theme/index';
 
 export interface DocSnapshot {
-  id: number;
+  id: string;
   code: string;
-  /**
-   * The duration of this snapshot in ms
-   * Should be greater or equal to transitionTime
-   */
   duration: number;
   transitionTime: number;
 }
@@ -26,7 +21,7 @@ export interface RawDoc {
   lineHeight: number;
   width: number;
   height: number;
-  theme: unknown;
+  theme: ThemeName;
   padding: DocPadding;
 }
 
@@ -51,12 +46,6 @@ export function getSnapshotAtTime(
   return [lastIndex, snapshots[lastIndex]?.duration ?? 0];
 }
 
-/**
- * The last transitionTime of the snapshot duration is used for transition
- * @param snapshot
- * @param offsetTime
- * @returns
- */
 export function isOffsetTimeInTransition(
   snapshot: DocSnapshot,
   offsetTime: number
@@ -64,11 +53,6 @@ export function isOffsetTimeInTransition(
   return offsetTime > snapshot.duration - snapshot.transitionTime;
 }
 
-/**
- * Get the video total duration in ms
- * @param doc
- * @returns
- */
 export function getSumDuration(doc: RawDoc, beforeIndex?: number) {
   const { snapshots } = doc;
   return snapshots.reduce((sum, snapshot, index) => {
