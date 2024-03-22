@@ -1,3 +1,4 @@
+import ControlPanel from '@/components/control';
 import EditorWindow from '@/components/editor';
 import Slides from '@/components/slides';
 import {
@@ -31,6 +32,17 @@ const Studio: React.FC<StudioProps> = () => {
         <main className="h-full flex-grow grow dark:bg-slate-950 p-4">
           <EditorWindow />
         </main>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel
+        id="control"
+        defaultSize={18}
+        collapsible={true}
+        collapsedSize={0}
+        minSize={16}
+        maxSize={20}
+      >
+        <ControlPanel />
       </ResizablePanel>
     </ResizablePanelGroup>
   );

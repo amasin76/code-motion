@@ -1,9 +1,11 @@
-import { type CSSProperties, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
+import { PauseIcon, PlayIcon } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
 import { getSumDuration } from '@/core/doc/raw-doc';
 import { DocumentDrawer } from '@/core/drawer';
 import { useStore } from '@/store';
 
-import { VideoExport } from './export';
+// import { VideoExport } from './export';
 
 export default function Preview() {
   const { doc, currentTime, setCurrentTime, setPlaying, playing } = useStore(
@@ -21,6 +23,8 @@ export default function Preview() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawerRef = useRef<DocumentDrawer>();
 
+  console.log(currentTime);
+
   useEffect(() => {
     const drawer = new DocumentDrawer(canvasRef.current as HTMLCanvasElement);
     drawerRef.current = drawer;
@@ -34,34 +38,27 @@ export default function Preview() {
   }, [doc, currentTime]);
 
   return (
-    <div className="">
-      <canvas ref={canvasRef} className="mx-auto border-x border-zinc-700" />
-      <div className="w-1/2">
+    <div className="flex flex-col items-center">
+      <div className="relative flex flex-col items-center">
+        <canvas ref={canvasRef} />
         <button
+          className="absolute bottom-7 p-2 rounded-full hover:bg-zinc-800 duration-200"
           type="button"
           onClick={() => {
             setPlaying(!playing);
           }}
         >
-          play
+          {playing ? <PauseIcon /> : <PlayIcon />}
         </button>
 
-        <VideoExport />
+        {/* <VideoExport /> */}
       </div>
-      <input
-        className="w-full"
-        type="range"
-        value={currentTime}
+      <Slider
+        className="w-1/3 mt-4 cursor-pointer"
         min={0}
         max={duration}
-        style={
-          {
-            '--progress-rate': currentTime / duration,
-          } as CSSProperties
-        }
-        onChange={(e) => {
-          setCurrentTime(Number(e.target.value));
-        }}
+        value={[currentTime]}
+        onValueChange={(newTime) => setCurrentTime(newTime[0])}
       />
     </div>
   );

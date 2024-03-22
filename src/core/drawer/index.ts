@@ -35,7 +35,7 @@ export class DocumentDrawer {
 
   constructor(
     public readonly canvas: HTMLCanvasElement,
-    public readonly ratio = 0.7
+    public readonly ratio = 0.745
   ) {
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('Failed to get canvas context');

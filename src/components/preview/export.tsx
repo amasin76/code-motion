@@ -3,6 +3,8 @@ import { useStore } from '@/store';
 import { EncodeStatus } from '@/store/encode-task';
 import { dateFilename, downloadBlob } from '@/utils/download';
 
+import { Button } from '../ui/button';
+
 export function VideoExport() {
   const { encodeState, startEncodeTask, abortEncodeTask } = useStore(
     (state) => ({
@@ -33,15 +35,15 @@ export function VideoExport() {
   const progressPercent = `${Math.round(progress * 100)}%`;
 
   return (
-    <button
-      type="button"
+    <Button
+      className="relative felx gap-1.5 w-full font-normal"
+      variant="secondary"
       title={
         encodeState?.status === EncodeStatus.Encoding ? 'Click to cancel' : ''
       }
       onClick={handleClick}
     >
-      <DownloadIcon />
-
+      <DownloadIcon className="w-5" />
       <span>
         {encodeState == null
           ? 'Export'
@@ -51,12 +53,12 @@ export function VideoExport() {
           ? progressPercent
           : 'Re-Export'}
       </span>
-
       <span
+        className={`absolute top-0 bottom-0 left-0 bg-slate-200 mix-blend-overlay animate-progress`}
         style={{
           width: progressPercent,
         }}
       />
-    </button>
+    </Button>
   );
 }

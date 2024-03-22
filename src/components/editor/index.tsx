@@ -34,17 +34,18 @@ function EditorWindow() {
 
   return (
     <Tabs
+      id="editor-window"
       defaultValue="editor"
-      className="max-w-[60rem] max-h-[60rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col"
+      className="max-w-[60rem] max-h-[40rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col"
     >
-      <div className="h-9 rounded-t-lg grid grid-cols-3 items-center px-4 z-10">
+      <div className="h-9 rounded-t-lg grid grid-cols-3 items-center pr-4 z-10">
         <div>
           <TabsList className="h-fit gap-2 bg-zinc-800 z-50">
-            <TabsTrigger value="editor">
-              <CodeIcon />
+            <TabsTrigger value="editor" className="flex gap-2">
+              <CodeIcon className="w-5" /> Code
             </TabsTrigger>
-            <TabsTrigger value="preview">
-              <PlaySquareIcon />
+            <TabsTrigger value="preview" className="flex gap-2">
+              <PlaySquareIcon className="w-5" /> Preview
             </TabsTrigger>
           </TabsList>
         </div>
@@ -68,7 +69,7 @@ function EditorWindow() {
           ></button>
         </div>
       </div>
-      <div className="flex-grow px-1 pb-1 overflow-auto">
+      <div className="flex-grow px-1 pb-1">
         <TabsContent value="editor" className="h-full">
           <Editor
             value={currentSnapShot?.code || ''}
