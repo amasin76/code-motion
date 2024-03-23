@@ -3,8 +3,9 @@ import { indentWithTab } from '@codemirror/commands';
 import { Compartment, EditorState } from '@codemirror/state';
 import { oneDarkTheme } from '@codemirror/theme-one-dark';
 import { EditorView, keymap } from '@codemirror/view';
+import { githubDark } from '@uiw/codemirror-themes-all';
 import { minimalSetup } from 'codemirror';
-import { coolGlow } from 'thememirror';
+import { useCodeEditorStore } from '@/store/code-control';
 import { assertNonNull } from '@/utils/assert';
 import { codeMirrorLanguageMap, type Language } from '@/utils/languages';
 
@@ -14,14 +15,6 @@ interface CodeEditorProps {
   className?: string;
   onChange: (value: string) => void;
 }
-
-const theme = EditorView.theme({
-  '&': {
-    fontSize: '150%',
-    height: '100%',
-    paddingLeft: '.5rem',
-  },
-});
 
 const extensionsCompartment = new Compartment();
 
@@ -34,6 +27,18 @@ export default function Editor({
   const elRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<EditorView>();
   const latestDocRef = useRef(value);
+
+  const { codeFontSize } = useCodeEditorStore((state) => ({
+    codeFontSize: state.codeFontSize,
+  }));
+
+  const theme = EditorView.theme({
+    '&': {
+      fontSize: `${codeFontSize}px`,
+      height: '100%',
+      paddingLeft: '.5rem',
+    },
+  });
 
   const updateListener = useMemo(
     () =>
@@ -56,7 +61,7 @@ export default function Editor({
         doc: latestDocRef.current,
         extensions: [
           minimalSetup,
-          coolGlow,
+          githubDark,
           theme,
           oneDarkTheme,
           keymap.of([indentWithTab]),
