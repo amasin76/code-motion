@@ -6,7 +6,7 @@ const Home = () => {
     <section className="relative">
       <div className="relative z-10 max-w-screen-xl mx-auto px-4 py-28 md:px-8">
         <div className="space-y-5 max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl dark:text-white font-extrabold mx-auto md:text-5xl">
+          <h1 className="text-4xl text-center font-bold bg-gradient-to-br from-white to-gray-300 bg-clip-text leading-tight text-transparent sm:leading-tight md:text-5xl">
             Present{' '}
             <span className="bg-gradient-to-r from-blue-500 to-teal-500 bg-clip-text text-transparent">
               Your Code

@@ -23,8 +23,6 @@ export default function Preview() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawerRef = useRef<DocumentDrawer>();
 
-  console.log(currentTime);
-
   useEffect(() => {
     const drawer = new DocumentDrawer(canvasRef.current as HTMLCanvasElement);
     drawerRef.current = drawer;

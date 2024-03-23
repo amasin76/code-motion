@@ -36,7 +36,7 @@ function EditorWindow() {
     <Tabs
       id="editor-window"
       defaultValue="editor"
-      className="max-w-[60rem] max-h-[40rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg shadow-md flex flex-col"
+      className="max-w-[60rem] max-h-[40rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg flex flex-col"
     >
       <div className="h-9 rounded-t-lg grid grid-cols-3 items-center pr-4 z-10">
         <div>
