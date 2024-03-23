@@ -42,7 +42,7 @@ function EditorWindow() {
         <div>
           <TabsList className="z-50 h-fit gap-2 bg-zinc-800">
             <TabsTrigger value="editor" className="flex gap-2">
-              <CodeIcon className="w-5" /> Code
+              <CodeIcon className="w-5" /> Editor
             </TabsTrigger>
             <TabsTrigger value="preview" className="flex gap-2">
               <PlaySquareIcon className="w-5" /> Preview

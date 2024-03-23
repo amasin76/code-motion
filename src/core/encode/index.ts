@@ -15,7 +15,7 @@ export class VideoEncoder {
 
   constructor(
     private readonly doc: RawDoc,
-    private readonly options: VideoEncodeOptions = {}
+    private readonly options: VideoEncodeOptions = {},
   ) {
     const canvas = document.createElement('canvas');
     this.drawer = new DocumentDrawer(canvas, 1);
@@ -24,7 +24,7 @@ export class VideoEncoder {
   }
 
   private get frameRate() {
-    return this.options.frameRate ?? 30;
+    return this.doc.frameRate ?? 60;
   }
 
   private get frameCount() {

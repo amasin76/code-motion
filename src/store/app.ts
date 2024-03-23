@@ -24,6 +24,7 @@ export const initialState: AppSliceState = {
     width: 1280,
     height: 720,
     theme: 'default',
+    frameRate: 60,
     padding: {
       top: 0,
       left: 50,
@@ -99,7 +100,7 @@ export interface AppSliceAction {
 }
 
 function reviseStateCurrentTime<
-  T extends Pick<AppSliceState, 'doc' | 'currentTime'>
+  T extends Pick<AppSliceState, 'doc' | 'currentTime'>,
 >(state: T): T {
   const totalDuration = getSumDuration(state.doc);
   return {
@@ -146,7 +147,7 @@ export const createAppSlice: StateCreator<
       reviseStateCurrentTime({
         currentTime: clampCurrentTime,
         doc: state.doc,
-      })
+      }),
     );
   },
 
@@ -171,7 +172,7 @@ export const createAppSlice: StateCreator<
       const snapshots = updateArrayAt(
         state.doc.snapshots,
         index + 1,
-        newSnapshot
+        newSnapshot,
       );
       const newDoc = {
         ...state.doc,

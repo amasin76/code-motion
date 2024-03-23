@@ -43,6 +43,7 @@ export const createEncodeSlice: StateCreator<
   startEncodeTask: () => {
     const { doc, abortEncodeTask } = get();
     abortEncodeTask();
+
     const encoder = new VideoEncoder(doc, {
       onProgress: (progress) => {
         set((state) => {
