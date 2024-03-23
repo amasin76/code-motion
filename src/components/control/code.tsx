@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { CameraIcon } from 'lucide-react';
+import { mirrorThemes, useCodeEditorStore } from '@/store/code-control';
 import { captureScreenShot } from '@/utils/screenshot';
 
 import { Button } from '../ui/button';
@@ -14,21 +14,15 @@ import {
   SelectValue,
 } from '../ui/select';
 
-const themes = [
-  { value: 'dracula', label: 'Dracula' },
-  { value: 'ifran', label: 'Ifran' },
-  { value: 'tokyo', label: 'Tokyo' },
-];
-
 export function CodeTab() {
-  const [selectedTheme, setSelectedTheme] = useState<string>(themes[0].value);
-
-  const handleThemeChange = (value: string) => {
-    setSelectedTheme(value);
-  };
-
   const handleScreenshot = () => {
     captureScreenShot('editor-window', 'png', 'transparent');
+  };
+
+  const { codeFontSize, setCodeFontSize } = useCodeEditorStore();
+
+  const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCodeFontSize(Number(e.target.value));
   };
 
   return (
@@ -37,23 +31,38 @@ export function CodeTab() {
         <Label htmlFor="font-size">
           font-size <sup>px</sup>
         </Label>
-        <Input id="font-size" type="number" defaultValue={18} />
+        <Input
+          id="font-size"
+          type="number"
+          defaultValue={codeFontSize}
+          min={1}
+          onChange={handleFontSizeChange}
+        />
+      </li>
+      <li>
+        <Label htmlFor="tab-size">
+          tab-size <sup>char</sup>
+        </Label>
+        <Input
+          id="tab-size"
+          type="number"
+          defaultValue={2}
+          min={1}
+          step={1}
+          disabled
+        />
       </li>
       <li>
         <Label>themes</Label>
-        <Select defaultValue={selectedTheme}>
+        <Select disabled>
           <SelectTrigger>
-            <SelectValue placeholder="Select a theme" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {themes.map((theme, idx) => (
-                <SelectItem
-                  key={idx}
-                  value={theme.value}
-                  onClick={() => handleThemeChange(theme.value)}
-                >
-                  {theme.label}
+              {Object.keys(mirrorThemes).map((theme, idx) => (
+                <SelectItem key={idx} value={theme}>
+                  {mirrorThemes[theme as keyof typeof mirrorThemes]}
                 </SelectItem>
               ))}
             </SelectGroup>

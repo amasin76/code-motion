@@ -12,15 +12,13 @@ import {
 
 export interface AppSliceState {
   doc: RawDoc;
-
   currentTime: number;
-
   playing: boolean;
 }
 
 export const initialState: AppSliceState = {
   doc: {
-    language: Language.javascript,
+    language: Language.tsx,
     fontSize: 30,
     lineHeight: 42,
     width: 1280,
