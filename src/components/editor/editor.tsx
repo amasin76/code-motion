@@ -50,7 +50,7 @@ export default function Editor({
           onChange(newValue);
         }
       }),
-    [onChange]
+    [onChange],
   );
 
   // create editor
@@ -71,7 +71,7 @@ export default function Editor({
       parent: assertNonNull(elRef.current),
     });
     editorRef.current = editorView;
-  }, []);
+  });
 
   // update configs
   useEffect(() => {

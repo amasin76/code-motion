@@ -7,7 +7,7 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { DocSnapshot, getSnapshotAtTime } from '@/core/doc/raw-doc';
 import { useStore } from '@/store';
 
-function Slides() {
+function Slider() {
   const [items, setItems] = useState([1, 2, 3]);
 
   const { doc, currentTime } = useStore();
@@ -22,9 +22,9 @@ function Slides() {
   }));
 
   return (
-    <ScrollArea className="w-full h-[calc(100vh-59px)] overflow-y-auto">
+    <ScrollArea className="h-[calc(100vh-59px)] w-full overflow-y-auto">
       <Reorder.Group
-        className="flex flex-col p-4 gap-4"
+        className="flex flex-col gap-4 p-4"
         values={items}
         onReorder={setItems}
       >
@@ -51,19 +51,19 @@ function Slides() {
                 <div className="group relative cursor-pointer">
                   {idx > 0 && (
                     <button
-                      className="absolute z-10 hidden group-hover:md:block group/delete-btn top-2 right-2 px-1 hover:bg-zinc-700 text-white rounded-md cursor-pointer"
+                      className="group/delete-btn absolute right-2 top-2 z-10 hidden cursor-pointer rounded-md px-1 text-white hover:bg-zinc-700 group-hover:md:block"
                       onClick={(e) => {
                         e.stopPropagation();
                         deleteSnapshot(idx);
                       }}
                     >
-                      <TrashIcon className="w-5 group-hover/delete-btn:text-red-400 text-white/30 duration-300" />
+                      <TrashIcon className="w-5 text-white/30 duration-300 group-hover/delete-btn:text-red-400" />
                     </button>
                   )}
-                  <span className="absolute text-slate-400 z-10 text-ms left-1.5 bottom-0">
+                  <span className="text-ms absolute bottom-0 left-1.5 z-10 text-slate-400">
                     {idx + 1}
                   </span>
-                  <div className="w-full aspect-[5/3]"></div>
+                  <div className="aspect-[5/3] w-full"></div>
                 </div>
               </Reorder.Item>
             </motion.div>
@@ -84,7 +84,7 @@ function Slides() {
   );
 }
 
-export default Slides;
+export default Slider;
 
 interface SlideActionsProps {
   snapshots: DocSnapshot[];
@@ -94,9 +94,9 @@ function SlideActions({ snapshots }: SlideActionsProps) {
   const duplicateSnapshot = useStore((state) => state.duplicateSnapshot);
 
   return (
-    <div className="w-full flex flex-wrap gap-4">
+    <div className="flex w-full flex-wrap gap-4">
       <Button
-        className="px-3 grow rounded bg-slate-800"
+        className="grow rounded bg-slate-800 px-3"
         variant={'secondary'}
         title={`Duplicate Slide#${snapshots.length - 1}`}
         onClick={() => {
@@ -106,11 +106,11 @@ function SlideActions({ snapshots }: SlideActionsProps) {
         <PlusIcon className="w-5 text-slate-400" />
       </Button>
       <Button
-        className="px-3 grow rounded"
+        className="grow rounded px-3"
         variant={'secondary'}
         title="Delete All"
       >
-        <RotateCcwIcon className="w-5 text-slate-400 bg-slate-800" />
+        <RotateCcwIcon className="w-5 bg-slate-800 text-slate-400" />
       </Button>
     </div>
   );

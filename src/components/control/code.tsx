@@ -71,7 +71,7 @@ export function CodeTab() {
       </li>
       <li>
         <Button
-          className="w-full flex gap-1.5 font-normal"
+          className="flex w-full gap-1.5 font-normal"
           variant="secondary"
           onClick={handleScreenshot}
         >

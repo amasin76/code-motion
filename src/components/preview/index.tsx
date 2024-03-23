@@ -5,8 +5,6 @@ import { getSumDuration } from '@/core/doc/raw-doc';
 import { DocumentDrawer } from '@/core/drawer';
 import { useStore } from '@/store';
 
-// import { VideoExport } from './export';
-
 export default function Preview() {
   const { doc, currentTime, setCurrentTime, setPlaying, playing } = useStore(
     (state) => ({
@@ -15,7 +13,7 @@ export default function Preview() {
       setCurrentTime: state.setCurrentTime,
       setPlaying: state.setPlaying,
       playing: state.playing,
-    })
+    }),
   );
 
   const duration = useMemo(() => getSumDuration(doc), [doc]);
@@ -40,7 +38,7 @@ export default function Preview() {
       <div className="relative flex flex-col items-center">
         <canvas ref={canvasRef} />
         <button
-          className="absolute bottom-7 p-2 rounded-full hover:bg-zinc-800 duration-200"
+          className="absolute bottom-7 rounded-full p-2 duration-200 hover:bg-zinc-800"
           type="button"
           onClick={() => {
             setPlaying(!playing);
@@ -48,11 +46,9 @@ export default function Preview() {
         >
           {playing ? <PauseIcon /> : <PlayIcon />}
         </button>
-
-        {/* <VideoExport /> */}
       </div>
       <Slider
-        className="w-1/3 mt-4 cursor-pointer"
+        className="mt-4 w-1/3 cursor-pointer"
         min={0}
         max={duration}
         value={[currentTime]}

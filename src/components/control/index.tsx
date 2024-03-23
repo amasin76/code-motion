@@ -9,8 +9,8 @@ import { VideoTab } from './video';
 
 export default function ControlPanel() {
   return (
-    <ScrollArea className="w-full h-[calc(100vh-57px)] dark:bg-gradient-to-b from-slate-950 to-slate-900 border border-left overflow-y-auto">
-      <Tabs defaultValue="code" className="w-full p-2 grid gap-2">
+    <ScrollArea className="border-left h-[calc(100vh-57px)] w-full overflow-y-auto border from-slate-950 to-slate-900 dark:bg-gradient-to-b">
+      <Tabs defaultValue="code" className="grid w-full gap-2 p-2">
         <TabsList className="w-fit justify-self-center">
           <TabsTrigger value="code" className="flex gap-2">
             <CodeIcon className="w-5" />

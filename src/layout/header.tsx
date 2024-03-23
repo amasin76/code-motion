@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { mainMenu } from '@/data/constant/menu';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/tailwind';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -33,32 +33,29 @@ export function Header() {
 
   return (
     <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/90 backdrop-blur">
-      <div className="container px-4 md:px-8 flex h-14 items-center">
-        <NavLink
-          to="/"
-          className="mr-6 flex items-center space-x-2 hidden md:flex"
-        >
+      <div className="container flex h-14 items-center px-4 md:px-8">
+        <NavLink to="/" className="mr-6 hidden items-center space-x-2 md:flex">
           <img src={logo} alt="logo" width={35} />
-          <span className="font-bold inline-block">Code Motion</span>
+          <span className="inline-block font-bold">Code Motion</span>
         </NavLink>
-        <div className="mr-4 flex flex-1 justify-center hidden md:flex">
+        <div className="mr-4 hidden flex-1 justify-center md:flex">
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {mainMenu.map((menu, index) =>
               menu.items !== undefined ? (
                 <DropdownMenu key={index}>
                   <DropdownMenuTrigger
                     className={cn(
-                      'flex items-center py-1 focus:outline-none text-sm font-medium transition-colors hover:text-primary',
+                      'flex items-center py-1 text-sm font-medium transition-colors hover:text-primary focus:outline-none',
                       menu.items
                         .filter((subitem) => subitem.to !== undefined)
                         .map((subitem) => subitem.to)
                         .includes(location.pathname)
                         ? 'text-foreground'
-                        : 'text-foreground/60'
+                        : 'text-foreground/60',
                     )}
                   >
                     {menu.title}
-                    <ChevronDownIcon className="ml-1 -mr-1 h-3 w-3 text-muted-foreground" />
+                    <ChevronDownIcon className="-mr-1 ml-1 h-3 w-3 text-muted-foreground" />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     className="w-48"
@@ -82,7 +79,7 @@ export function Header() {
                         </DropdownMenuLabel>
                       ) : (
                         <DropdownMenuSeparator key={subindex} />
-                      )
+                      ),
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -93,13 +90,13 @@ export function Header() {
                   className={({ isActive }) =>
                     cn(
                       'text-sm font-medium transition-colors hover:text-primary',
-                      isActive ? 'text-foreground' : 'text-foreground/60'
+                      isActive ? 'text-foreground' : 'text-foreground/60',
                     )
                   }
                 >
                   {menu.title}
                 </NavLink>
-              )
+              ),
             )}
           </nav>
         </div>
@@ -135,7 +132,7 @@ export function Header() {
                           .filter((subitem) => subitem.to !== undefined)
                           .map((subitem) => subitem.to)
                           .includes(location.pathname)
-                      : false
+                      : false,
                   )
                 }
               >
@@ -149,13 +146,13 @@ export function Header() {
                       >
                         <AccordionTrigger
                           className={cn(
-                            'py-1 hover:no-underline hover:text-primary [&[data-state=open]]:text-primary',
+                            'py-1 hover:text-primary hover:no-underline [&[data-state=open]]:text-primary',
                             menu.items
                               .filter((subitem) => subitem.to !== undefined)
                               .map((subitem) => subitem.to)
                               .includes(location.pathname)
                               ? 'text-foreground'
-                              : 'text-foreground/60'
+                              : 'text-foreground/60',
                           )}
                         >
                           <div className="flex">{menu.title}</div>
@@ -170,10 +167,10 @@ export function Header() {
                                   onClick={() => setOpen(false)}
                                   className={({ isActive }) =>
                                     cn(
-                                      'block justify-start py-1 h-auto font-normal hover:text-primary',
+                                      'block h-auto justify-start py-1 font-normal hover:text-primary',
                                       isActive
                                         ? 'text-foreground'
-                                        : 'text-foreground/60'
+                                        : 'text-foreground/60',
                                     )
                                   }
                                 >
@@ -183,7 +180,7 @@ export function Header() {
                                 <div className="px-3">
                                   {/* <Separator /> */}
                                 </div>
-                              )
+                              ),
                             )}
                           </div>
                         </AccordionContent>
@@ -196,13 +193,13 @@ export function Header() {
                         className={({ isActive }) =>
                           cn(
                             'py-1 text-sm font-medium transition-colors hover:text-primary',
-                            isActive ? 'text-foreground' : 'text-foreground/60'
+                            isActive ? 'text-foreground' : 'text-foreground/60',
                           )
                         }
                       >
                         {menu.title}
                       </NavLink>
-                    )
+                    ),
                   )}
                 </div>
               </Accordion>
@@ -211,10 +208,10 @@ export function Header() {
         </Sheet>
         <a href="/" className="mr-6 flex items-center space-x-2 md:hidden">
           <img src={logo} alt="logo" width={35} />
-          <span className="font-bold inline-block">Code Motion</span>
+          <span className="inline-block font-bold">Code Motion</span>
         </a>
         {/* right */}
-        <div className="flex items-center justify-between space-x-2 ml-auto">
+        <div className="ml-auto flex items-center justify-between space-x-2">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
           </div>
@@ -230,7 +227,7 @@ export function Header() {
                   buttonVariants({
                     variant: 'ghost',
                   }),
-                  'w-9 px-0'
+                  'w-9 px-0',
                 )}
               >
                 <GitHubLogoIcon className="h-4 w-4" />

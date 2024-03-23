@@ -8,13 +8,13 @@ import { Header } from './header';
 
 const LayoutComponent = () => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <Header />
       <div className="flex flex-col">
         <ErrorBoundary fallbackRender={fallbackRender}>
           <Suspense
             fallback={
-              <div className="w-full h-full flex justify-center items-center">
+              <div className="flex h-full w-full items-center justify-center">
                 <span>Loading...</span>
               </div>
             }

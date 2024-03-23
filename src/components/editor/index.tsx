@@ -29,18 +29,18 @@ function EditorWindow() {
         code,
       });
     },
-    [currentSnapShot, currentSnapshotIndex, updateSnapshot]
+    [currentSnapShot, currentSnapshotIndex, updateSnapshot],
   );
 
   return (
     <Tabs
       id="editor-window"
       defaultValue="editor"
-      className="max-w-[60rem] max-h-[40rem] h-full m-auto shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900 rounded-lg flex flex-col"
+      className="m-auto flex h-full max-h-[40rem] max-w-[60rem] flex-col rounded-lg shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900"
     >
-      <div className="h-9 rounded-t-lg grid grid-cols-3 items-center pr-4 z-10">
+      <div className="z-10 grid h-9 grid-cols-3 items-center rounded-t-lg pr-4">
         <div>
-          <TabsList className="h-fit gap-2 bg-zinc-800 z-50">
+          <TabsList className="z-50 h-fit gap-2 bg-zinc-800">
             <TabsTrigger value="editor" className="flex gap-2">
               <CodeIcon className="w-5" /> Code
             </TabsTrigger>
@@ -49,19 +49,19 @@ function EditorWindow() {
             </TabsTrigger>
           </TabsList>
         </div>
-        <div className="justify-center inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 ring-gray-800">
+        <div className="inline-flex items-center justify-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 ring-gray-800">
           <input
-            className="bg-transparent focus:border-none focus:outline-none text-center"
+            className="bg-transparent text-center focus:border-none focus:outline-none"
             defaultValue="Code.tsx"
             type="text"
             spellCheck="false"
           />
         </div>
         <div className="flex justify-end">
-          <button className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></button>
-          <button className="w-3 h-3 bg-green-400 rounded-full mr-2"></button>
+          <button className="mr-2 h-3 w-3 rounded-full bg-yellow-400"></button>
+          <button className="mr-2 h-3 w-3 rounded-full bg-green-400"></button>
           <button
-            className="w-3 h-3 bg-red-400 rounded-full"
+            className="h-3 w-3 rounded-full bg-red-400"
             onClick={() => {
               +currentSnapShot.id > 1 &&
                 deleteSnapshot(+currentSnapShot.id - 1);

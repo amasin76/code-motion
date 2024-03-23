@@ -1,15 +1,13 @@
 import ControlPanel from '@/components/control';
 import EditorWindow from '@/components/editor';
-import Slides from '@/components/slides';
+import Slider from '@/components/slider';
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
 
-interface StudioProps {}
-
-const Studio: React.FC<StudioProps> = () => {
+const Studio = () => {
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -23,13 +21,13 @@ const Studio: React.FC<StudioProps> = () => {
         collapsedSize={0}
         minSize={6}
       >
-        <aside className="h-full dark:bg-gradient-to-b from-slate-950 to-slate-900 border border-right">
-          <Slides />
+        <aside className="border-right h-full border from-slate-950 to-slate-900 dark:bg-gradient-to-b">
+          <Slider />
         </aside>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel id="editor">
-        <main className="h-full flex-grow grow dark:bg-slate-950 p-4">
+        <main className="h-full flex-grow p-4 dark:bg-slate-950">
           <EditorWindow />
         </main>
       </ResizablePanel>

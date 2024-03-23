@@ -11,7 +11,7 @@ export function VideoExport() {
       encodeState: state.encodeState,
       startEncodeTask: state.startEncodeTask,
       abortEncodeTask: state.abortEncodeTask,
-    })
+    }),
   );
 
   const handleClick = () => {
@@ -29,14 +29,14 @@ export function VideoExport() {
     encodeState?.status === EncodeStatus.Encoding
       ? encodeState.progress
       : encodeState?.status === EncodeStatus.Done
-      ? 1
-      : 0;
+        ? 1
+        : 0;
 
   const progressPercent = `${Math.round(progress * 100)}%`;
 
   return (
     <Button
-      className="relative felx gap-1.5 w-full font-normal"
+      className="felx relative w-full gap-1.5 font-normal"
       variant="secondary"
       title={
         encodeState?.status === EncodeStatus.Encoding ? 'Click to cancel' : ''
@@ -48,13 +48,13 @@ export function VideoExport() {
         {encodeState == null
           ? 'Export'
           : encodeState.status === EncodeStatus.Done
-          ? 'Save'
-          : encodeState.status === EncodeStatus.Encoding
-          ? progressPercent
-          : 'Re-Export'}
+            ? 'Save'
+            : encodeState.status === EncodeStatus.Encoding
+              ? progressPercent
+              : 'Re-Export'}
       </span>
       <span
-        className={`absolute top-0 bottom-0 left-0 bg-slate-200 mix-blend-overlay animate-progress`}
+        className={`animate-progress absolute bottom-0 left-0 top-0 bg-slate-200 mix-blend-overlay`}
         style={{
           width: progressPercent,
         }}
