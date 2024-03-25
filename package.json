@@ -11,7 +11,9 @@
   },
   "prettier": {
     "singleQuote": true,
-    "plugins": ["prettier-plugin-tailwindcss"]
+    "plugins": [
+      "prettier-plugin-tailwindcss"
+    ]
   },
   "dependencies": {
     "@codemirror/commands": "^6.3.3",
@@ -43,6 +45,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "codemirror": "^6.0.1",
+    "convex": "^1.10.0",
     "d3-ease": "^3.0.1",
     "dedent": "^1.5.1",
     "diff": "^5.2.0",
