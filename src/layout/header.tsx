@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { UserButton } from '@clerk/clerk-react';
 import {
   ChevronDownIcon,
   GitHubLogoIcon,
@@ -13,7 +14,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -230,34 +230,13 @@ export function Header() {
                   'w-9 px-0',
                 )}
               >
-                <GitHubLogoIcon className="h-4 w-4" />
+                <GitHubLogoIcon className="h-full w-full" />
                 <span className="sr-only">GitHub</span>
               </div>
             </a>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="relative h-8 w-8 rounded-full"
-                >
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback>AV</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Bio</p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      bio@example.com
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Log out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <button>
+              <UserButton afterSignOutUrl="/" />
+            </button>
           </nav>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function SignInWrapper() {
         </div>
       </div>
       <div className="flex justify-center">
-        <SignIn />
+        <SignIn redirectUrl="/studio" signUpUrl="/" />
       </div>
     </section>
   );
