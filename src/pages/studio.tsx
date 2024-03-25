@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
 import ControlPanel from '@/components/control';
 import EditorWindow from '@/components/editor';
 import Slider from '@/components/slider';
@@ -8,6 +11,13 @@ import {
 } from '@/components/ui/resizable';
 
 const Studio = () => {
+  const { userId } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !userId && navigate('/sign-in');
+  });
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
