@@ -24,7 +24,7 @@ export default function SignInWrapper() {
           role="alert"
         >
           <InfoIcon />
-          <p className="ms-3">Demo Acc | email: test - password: 1234</p>
+          <p className="ms-3">Demo Acc | user: test - password: 1234</p>
         </div>
       </div>
       <div className="flex justify-center">

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
+import { dark } from '@clerk/themes';
 import { ModeToggle } from '@/components/mode-toggle';
 import { Spinner } from '@/components/ui/Spinner';
 
@@ -19,7 +20,13 @@ const LayoutComponent = () => {
 
   return (
     <div className="h-full w-full">
-      <ClerkProvider navigate={navigate} publishableKey={clerkPubKey}>
+      <ClerkProvider
+        navigate={navigate}
+        publishableKey={clerkPubKey}
+        appearance={{
+          baseTheme: dark,
+        }}
+      >
         <Header />
         <div className="flex flex-col">
           <ErrorBoundary fallbackRender={fallbackRender}>

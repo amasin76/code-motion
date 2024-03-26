@@ -36,12 +36,17 @@ export const initialState: AppSliceState = {
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
-          export function Demo({ active }) {
-            return (
-              <div
-                className={\`demo \${active ? 'active' : ''}\`}
-              ></div>
-            )
+          import React, { Component, Fragment } from 'react';
+
+          export class MyComponent extends Component {
+            render(){
+              return (
+                <Fragment>
+                  <h1>Code Motion</h1>
+                  <p>💯 diff animation</p>
+                </Fragment>
+              );
+            }
           }
         `,
       },
@@ -50,13 +55,15 @@ export const initialState: AppSliceState = {
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
-          import clsx from 'clsx'
-          export function Demo({ active }) {
+          import React, { Fragment } from 'react';
+
+          export function MyComponent {
             return (
-              <div
-                className={\`demo \${active ? 'active' : ''}\`}
-              ></div>
-            )
+              <Fragment>
+                <h1>Code Motion</h1>
+                <p>💯 diff animation</p>
+              </Fragment>
+            );
           }
       `,
       },
@@ -65,13 +72,13 @@ export const initialState: AppSliceState = {
         duration: 3000,
         transitionTime: 1000,
         code: dedent`
-          import Bio from 'clsx'
-          export function Demo({ active }) {
+          export function MyComponent {
             return (
-              <div
-                className={clsx('Bio', active && 'active')}
-              ></div>
-            )
+              <>
+                <h1>Code Motion</h1>
+                <p>💯 diff animation</p>
+              </>
+            );
           }
       `,
       },
