@@ -14,6 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -37,6 +38,12 @@ export function Header() {
         <NavLink to="/" className="mr-6 hidden items-center space-x-2 md:flex">
           <img src={logo} alt="logo" width={35} />
           <span className="inline-block font-bold">Code Motion</span>
+          <Badge
+            className="rounded-lg border-yellow-900 bg-yellow-500/20 px-1.5 text-yellow-600"
+            variant="outline"
+          >
+            beta
+          </Badge>
         </NavLink>
         <div className="mr-4 hidden flex-1 justify-center md:flex">
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -209,6 +216,12 @@ export function Header() {
         <a href="/" className="mr-6 flex items-center space-x-2 md:hidden">
           <img src={logo} alt="logo" width={35} />
           <span className="inline-block font-bold">Code Motion</span>
+          <Badge
+            className="rounded-lg border-yellow-900 bg-yellow-500/20 px-1.5 text-yellow-600"
+            variant="outline"
+          >
+            beta
+          </Badge>
         </a>
         {/* right */}
         <div className="ml-auto flex items-center justify-between space-x-2">
