@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { setRafInterval } from '@/utils/raf';
 
 import { getSumDuration } from '../core/doc/raw-doc';
@@ -15,10 +15,21 @@ export function createStore() {
   const useStore = create<
     AppSliceState & AppSliceAction & EncodeSliceState & EncodeSliceAction
   >()(
-    devtools((...args) => ({
-      ...createAppSlice(...args),
-      ...createEncodeSlice(...args),
-    }))
+    persist(
+      (...args) => ({
+        ...createAppSlice(...args),
+        ...createEncodeSlice(...args),
+      }),
+      {
+        name: 'app-store',
+        version: 0,
+        partialize: (state) => ({
+          doc: state.doc,
+          currentTime: 0,
+          playing: false,
+        }),
+      },
+    ),
   );
 
   /**
