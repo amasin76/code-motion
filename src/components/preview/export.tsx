@@ -48,7 +48,7 @@ export function VideoExport() {
         {encodeState == null
           ? 'Export'
           : encodeState.status === EncodeStatus.Done
-            ? 'Save'
+            ? 'Download'
             : encodeState.status === EncodeStatus.Encoding
               ? progressPercent
               : 'Re-Export'}
