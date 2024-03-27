@@ -6,6 +6,7 @@ const Home = lazy(() => import('@/pages/home'));
 const Studio = lazy(() => import('@/pages/studio'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 const SignIn = lazy(() => import('@/pages/sign-in'));
+const ComingSoon = lazy(() => import('@/pages/coming-soon'));
 
 const routes = [
   {
@@ -23,6 +24,14 @@ const routes = [
       {
         path: 'studio',
         element: <Studio />,
+      },
+      {
+        path: 'about',
+        element: <ComingSoon />,
+      },
+      {
+        path: 'support',
+        element: <ComingSoon />,
       },
       {
         path: '*',
