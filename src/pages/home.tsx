@@ -1,7 +1,6 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLinkIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
-import diffAnimExample from '@/assets/diff-anim-example.webp';
-import editorExample from '@/assets/editor-example.png';
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { features } from '@/data/constant/home';
+import { examples, faqs, features } from '@/data/constant/home';
 
 const Home = () => {
   return (
@@ -106,39 +105,29 @@ const Home = () => {
         <section aria-label="examples">
           <div className="mx-auto my-4 mt-16 max-w-6xl">
             <div className="grid items-center gap-16 px-2 md:grid-cols-2">
-              <div className="shadow-lg shadow-sky-700/20 transition md:-rotate-1 md:skew-x-1 hover:md:scale-105 hover:md:shadow-sky-700/50">
-                <img
-                  src={diffAnimExample}
-                  loading="lazy"
-                  className="w-full rounded-md object-contain"
-                />
-              </div>
-              <div>
-                <h3 className="mb-4 text-2xl font-extrabold">Diff Animation</h3>
-                <p className="max-w-[450px] text-sm text-gray-600 dark:text-gray-400">
-                  Video-enabled Diff Animation provides a dynamic visual
-                  representation of your code modifications, allows your
-                  audience to track and understand the changes over the
-                  snapshots. With customizable settings like adjust frame-rate,
-                  font-size...
-                </p>
-              </div>
-              <div className="justify-self-end max-md:order-1">
-                <h3 className="mb-4 text-2xl font-extrabold">Editor</h3>
-                <p className="max-w-[450px] text-sm text-gray-600 dark:text-gray-400">
-                  In-browser Editor, powered by CodeMirror, the editor offers
-                  syntax highlighting, and it comes equipped with usual commands
-                  such as undo, redo, pairing... Providing a user-friendly
-                  interface that mimics the functionality of a full-fledged IDE
-                </p>
-              </div>
-              <div className="shadow-lg shadow-sky-700/20 transition md:rotate-1 md:-skew-x-2 hover:md:scale-105 hover:md:shadow-sky-700/50">
-                <img
-                  src={editorExample}
-                  loading="lazy"
-                  className="w-full rounded-md object-contain"
-                />
-              </div>
+              {examples.map((example, index) => (
+                <Fragment key={index}>
+                  <div
+                    className={`shadow-lg shadow-sky-700/20 transition md:-rotate-1 md:skew-x-3 hover:md:scale-105 hover:md:shadow-sky-700/50 ${index % 2 !== 0 ? 'md:col-start-2 md:row-start-2 md:rotate-1 md:-skew-x-3' : ''}`}
+                  >
+                    <img
+                      src={example.image}
+                      loading="lazy"
+                      className="w-full rounded-md object-contain"
+                    />
+                  </div>
+                  <div
+                    className={`${index % 2 !== 0 ? 'justify-self-end md:col-start-1 md:row-start-2' : ''}`}
+                  >
+                    <h3 className="mb-4 text-2xl font-extrabold">
+                      {example.title}
+                    </h3>
+                    <p className="max-w-[450px] text-sm text-gray-600 dark:text-gray-400">
+                      {example.description}
+                    </p>
+                  </div>
+                </Fragment>
+              ))}
             </div>
           </div>
         </section>
@@ -148,49 +137,12 @@ const Home = () => {
               FAQ
             </h2>
             <Accordion type="single" collapsible className="mx-auto max-w-3xl">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  What video formats are available
-                </AccordionTrigger>
-                <AccordionContent>
-                  Currently supports the WebM video format.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>
-                  {' '}
-                  How is the video quality ensured?
-                </AccordionTrigger>
-                <AccordionContent>
-                  Good quality by using canvas, currently HD (1280 x 720p)
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>
-                  What syntax highlighting themes are supported?
-                </AccordionTrigger>
-                <AccordionContent className="flex gap-2">
-                  Variety of themes check
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://uiwjs.github.io/react-codemirror/#/theme/home"
-                    className="flex items-center gap-0.5 font-medium text-blue-600 hover:underline dark:text-blue-500"
-                  >
-                    react-codemirror docs <ExternalLinkIcon />
-                  </a>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  What about privacy and data security
-                </AccordionTrigger>
-                <AccordionContent>
-                  We&apos;re planning to move to an offline-first approach,
-                  which means there will be no servers involved, and all your
-                  work will be stored in your local storage
-                </AccordionContent>
-              </AccordionItem>
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger>{faq.question}</AccordionTrigger>
+                  <AccordionContent>{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
           </div>
         </section>

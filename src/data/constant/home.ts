@@ -7,6 +7,9 @@ import {
   Share2Icon,
   SmileIcon,
 } from 'lucide-react';
+import diffAnimExample from '@/assets/diff-anim-example.webp';
+import editorExample from '@/assets/editor-example.png';
+import previewExample from '@/assets/preview-example.png';
 
 export const features = [
   {
@@ -44,5 +47,50 @@ export const features = [
     status: 'soon',
     description:
       'A canvas layerd over the code to use pencils, shapes, and more to express more',
+  },
+];
+
+export const examples = [
+  {
+    icon: 'ApertureIcon',
+    title: 'Diff Animation',
+    description:
+      'Video-enabled to provides a dynamic visual representation of code changes, allows your audience to track and understand the changes over the snapshots, w/ customization: frame-rate - font-size...',
+    image: diffAnimExample,
+  },
+  {
+    icon: 'CodeIcon',
+    title: 'Editor',
+    description:
+      'In-browser Editor, powered by CodeMirror, and it comes equipped with usual features such as syntax highlighting - undo - redo - pairing... mimics the functionality of an IDE',
+    image: editorExample,
+  },
+  {
+    icon: 'PreviewIcon',
+    title: 'Preview',
+    description:
+      'Allows you to preview your work before exporting it, comes with a controllable player equipped with a slider to easily navigate through your code snapshots',
+    image: previewExample,
+  },
+];
+
+export const faqs = [
+  {
+    question: 'What video formats are available?',
+    answer: 'Currently supports the WebM video format.',
+  },
+  {
+    question: 'How is the video quality ensured?',
+    answer: 'Good quality by using canvas, currently HD (1280 x 720p).',
+  },
+  {
+    question: 'What themes are supported?',
+    answer:
+      'Variety of themes check react-codemirror docs: https://uiwjs.github.io/react-codemirror/#/theme/home',
+  },
+  {
+    question: 'What about privacy and security?',
+    answer:
+      "We're planning to move to an offline-first approach, which means there will be no servers involved, and all your work will be stored in your local storage.",
   },
 ];
