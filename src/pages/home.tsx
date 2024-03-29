@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLinkIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import {
   Accordion,
   AccordionContent,
@@ -108,13 +108,23 @@ const Home = () => {
               {examples.map((example, index) => (
                 <Fragment key={index}>
                   <div
-                    className={`shadow-lg shadow-sky-700/20 transition md:-rotate-1 md:skew-x-3 hover:md:scale-105 hover:md:shadow-sky-700/50 ${index % 2 !== 0 ? 'md:col-start-2 md:row-start-2 md:rotate-1 md:-skew-x-3' : ''}`}
+                    className={`shadow-lg shadow-sky-700/20 transition hover:md:scale-105 hover:md:shadow-sky-700/50 ${index % 2 === 0 ? 'md:-rotate-1 md:skew-x-3' : 'md:col-start-2 md:row-start-2 md:rotate-1 md:-skew-x-3'}`}
                   >
-                    <img
-                      src={example.image}
-                      loading="lazy"
-                      className="w-full rounded-md object-contain"
-                    />
+                    {example.type === 'image' ? (
+                      <img
+                        src={example.media}
+                        loading="lazy"
+                        className="w-full rounded-md object-contain"
+                      />
+                    ) : (
+                      <video
+                        loop
+                        autoPlay
+                        className="w-full rounded-md object-contain"
+                      >
+                        <source src={example.media} type="video/webm" />
+                      </video>
+                    )}
                   </div>
                   <div
                     className={`${index % 2 !== 0 ? 'justify-self-end md:col-start-1 md:row-start-2' : ''}`}

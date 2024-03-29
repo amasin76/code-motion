@@ -7,7 +7,7 @@ import {
   Share2Icon,
   SmileIcon,
 } from 'lucide-react';
-import diffAnimExample from '@/assets/diff-anim-example.webp';
+import diffAnimExample from '@/assets/diff-anim-example.webm';
 import editorExample from '@/assets/editor-example.png';
 import previewExample from '@/assets/preview-example.png';
 
@@ -56,21 +56,24 @@ export const examples = [
     title: 'Diff Animation',
     description:
       'Video-enabled to provides a dynamic visual representation of code changes, allows your audience to track and understand the changes over the snapshots, w/ customization: frame-rate - font-size...',
-    image: diffAnimExample,
+    media: diffAnimExample,
+    type: 'video',
   },
   {
     icon: 'CodeIcon',
     title: 'Editor',
     description:
       'In-browser Editor, powered by CodeMirror, and it comes equipped with usual features such as syntax highlighting - undo - redo - pairing... mimics the functionality of an IDE',
-    image: editorExample,
+    media: editorExample,
+    type: 'image',
   },
   {
     icon: 'PreviewIcon',
     title: 'Preview',
     description:
       'Allows you to preview your work before exporting it, comes with a controllable player equipped with a slider to easily navigate through your code snapshots',
-    image: previewExample,
+    media: previewExample,
+    type: 'image',
   },
 ];
 
