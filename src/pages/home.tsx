@@ -119,6 +119,7 @@ const Home = () => {
                     ) : (
                       <video
                         loop
+                        muted
                         autoPlay
                         className="w-full rounded-md object-contain"
                       >
