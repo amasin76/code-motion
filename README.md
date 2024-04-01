@@ -1,6 +1,6 @@
 <div align="center">
   <h2>
-    An effortless video-enabled code diff animation tool for visualize code changes.
+    An effortless video code diff-animation tool for visualizing code changes
   </h2>
 </div>
 
@@ -36,9 +36,9 @@
 - Student showcasing specific code snippets during presentation.  
   ...
 
-## Installation and running
+## Developing
 
-Clone the repository
+Clone the repository, then you can run it locally or in a docker container
 
 ### locally
 
@@ -65,7 +65,7 @@ Clone the repository
    docker-compose up
    ```
 
-After running the app either locally or in Docker, navigate to http://localhost:5173.
+After running the app either locally or in docker, navigate to http://localhost:5173.
 
 ## Tech Stack
 
@@ -95,4 +95,4 @@ but only stores anonymized data, and does not use cookies [more info](https://ve
 
 ## Like Code Motion?
 
-[Don't forget to star the repository! ⭐️](https://github.com/amasin76/code-motion#start-of-content)
+Don't forget to star the repository! ⭐️
