@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  vite_docker:
+    image: node:18-alpine
+    container_name: vite_docker
+    entrypoint: /bin/sh -c "npm install -g pnpm && pnpm dev --host"
+    ports:
+      - 5173:5173
+    working_dir: /srv/app
+    volumes:
+      - type: bind
+        source: ./
+        target: /srv/app
+    tty: true
