@@ -16,8 +16,6 @@
     ]
   },
   "dependencies": {
-    "@clerk/clerk-react": "^4.30.7",
-    "@clerk/themes": "^1.7.10",
     "@codemirror/commands": "^6.3.3",
     "@codemirror/lang-cpp": "^6.0.2",
     "@codemirror/lang-css": "^6.2.1",

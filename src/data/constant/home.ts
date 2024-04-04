@@ -26,7 +26,7 @@ export const features = [
   {
     icon: React.createElement(SmileIcon),
     title: 'Free',
-    description: 'Absolutely free, no cost, no catches or conditions. enjoy!',
+    description: 'Absolutely free, no cost, no sign-up, no catches. enjoy!',
   },
   {
     icon: React.createElement(CodeIcon),

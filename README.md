@@ -59,7 +59,7 @@ Clone the repository, then you can run it locally or in a docker container
 
 ### Docker
 
-1. Pull the image and run the container
+1. Run in it a container
 
    ```sh
    docker-compose up
@@ -78,12 +78,10 @@ After running the app either locally or in docker, navigate to http://localhost:
 - CodeMirror : A code editor component for the web.
 - DiffJs : A text differencing implementation based on the O(ND)Algorithm.
 - PrismJs : A syntax highlighting library for code blocks
-- Clerk : A third sevice to simplify the authentication
 
 ## Privacy
 
-App is designed to be offline-first, meaning that it does not rely on any external servers or backdoors,  
-and soon i will remove the needs to sign-in (for now use demo acc, user: test pwd: 1234).
+App is designed to be offline-first, meaning that it does not rely on any external servers or backdoors,
 
 However, code motion utilizes Vercel Basic Analytics:  
 but only stores anonymized data, and does not use cookies [more info](https://vercel.com/docs/analytics#how-visitors-are-determined)

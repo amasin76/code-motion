@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { UserButton } from '@clerk/clerk-react';
 import {
   ChevronDownIcon,
   GitHubLogoIcon,
@@ -247,9 +246,6 @@ export function Header() {
                 <span className="sr-only">GitHub</span>
               </div>
             </a>
-            <button>
-              <UserButton afterSignOutUrl="/" />
-            </button>
           </nav>
         </div>
       </div>

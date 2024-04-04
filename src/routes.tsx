@@ -5,7 +5,6 @@ import LayoutComponent from '@/layout';
 const Home = lazy(() => import('@/pages/home'));
 const Studio = lazy(() => import('@/pages/studio'));
 const NotFound = lazy(() => import('@/pages/not-found'));
-const SignIn = lazy(() => import('@/pages/sign-in'));
 const ComingSoon = lazy(() => import('@/pages/coming-soon'));
 
 const routes = [
@@ -16,10 +15,6 @@ const routes = [
       {
         path: '',
         element: <Home />,
-      },
-      {
-        path: 'sign-in',
-        element: <SignIn />,
       },
       {
         path: 'studio',
