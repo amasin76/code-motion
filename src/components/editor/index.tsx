@@ -3,7 +3,6 @@ import { CodeIcon, PlaySquareIcon } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getSnapshotAtTime } from '@/core/doc/raw-doc';
 import { useStore } from '@/store';
-import { Language } from '@/utils/languages';
 
 import Preview from '../preview';
 
@@ -73,7 +72,7 @@ function EditorWindow() {
         <TabsContent value="editor" className="h-full">
           <Editor
             value={currentSnapShot?.code || ''}
-            language={doc.language || Language.jsx}
+            language={doc.language}
             className="h-full"
             onChange={handleCodeUpdate}
           />

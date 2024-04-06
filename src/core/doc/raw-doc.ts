@@ -1,4 +1,5 @@
-import { type Language } from '../code-lang/languages';
+import { LanguageName } from '@uiw/codemirror-extensions-langs';
+
 import { type ThemeName } from '../theme/index';
 
 export interface DocSnapshot {
@@ -15,7 +16,7 @@ export interface DocPadding {
 }
 
 export interface RawDoc {
-  language: Language;
+  language: LanguageName;
   snapshots: DocSnapshot[];
   fontSize: number;
   lineHeight: number;

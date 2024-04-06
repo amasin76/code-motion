@@ -1,7 +1,6 @@
 import dedent from 'dedent';
 import { type StateCreator } from 'zustand';
 import { removeArrayAt, updateArrayAt } from '@/utils/array';
-import { Language } from '@/utils/languages';
 import { clamp } from '@/utils/number';
 
 import {
@@ -18,7 +17,7 @@ export interface AppSliceState {
 
 export const initialState: AppSliceState = {
   doc: {
-    language: Language.tsx,
+    language: 'tsx',
     fontSize: 30,
     lineHeight: 42,
     width: 1280,

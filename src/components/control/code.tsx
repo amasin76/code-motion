@@ -1,4 +1,4 @@
-import { langNames } from '@uiw/codemirror-extensions-langs';
+import { langNames, LanguageName } from '@uiw/codemirror-extensions-langs';
 import { CameraIcon } from 'lucide-react';
 import { useStore } from '@/store';
 import { mirrorThemes, useCodeEditorStore } from '@/store/code-control';
@@ -31,7 +31,7 @@ export function CodeTab() {
     setCodeFontSize(Number(e.target.value));
   };
 
-  const handleLanguageChange = (selectedLanguage) => {
+  const handleLanguageChange = (selectedLanguage: LanguageName) => {
     const updatedDoc = { ...doc, language: selectedLanguage };
     updateDocProperties(updatedDoc);
   };

@@ -1,8 +1,7 @@
+import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import memoize from 'memoizerific';
 import Prism, { type TokenStream } from 'prismjs';
 import { isSpaces, splitToTokens } from '@/utils/string';
-
-import { type Language } from '../code-lang/languages';
 
 interface RawToken {
   value: string;
@@ -13,9 +12,9 @@ export interface Token extends RawToken {
   invisible: boolean;
 }
 
-function createTokens(code: string, language: Language): Token[] {
+function createTokens(code: string, language: LanguageName): Token[] {
   const rawTokens = flattenPrismTokens(
-    Prism.tokenize(code, Prism.languages[language])
+    Prism.tokenize(code, Prism.languages[language]),
   );
 
   return processRawTokens(rawTokens);

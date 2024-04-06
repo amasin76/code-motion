@@ -1,13 +1,13 @@
 import { type LanguageSupport } from '@codemirror/language';
 import { EditorView } from '@codemirror/view';
-import { loadLanguage } from '@uiw/codemirror-extensions-langs';
+import { LanguageName, loadLanguage } from '@uiw/codemirror-extensions-langs';
 import { githubDark } from '@uiw/codemirror-themes-all';
 import CodeMirror from '@uiw/react-codemirror';
 import { useCodeEditorStore } from '@/store/code-control';
 
 interface CodeEditorProps {
   value: string;
-  language: string;
+  language: LanguageName;
   className?: string;
   onChange: (value: string) => void;
 }
