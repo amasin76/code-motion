@@ -11,6 +11,14 @@ import {
   type EncodeSliceState,
 } from './encode-task';
 
+export const sliceResetFns = new Set<() => void>();
+
+export const resetAllSlices = () => {
+  sliceResetFns.forEach((resetFn) => {
+    resetFn();
+  });
+};
+
 export function createStore() {
   const useStore = create<
     AppSliceState & AppSliceAction & EncodeSliceState & EncodeSliceAction

@@ -9,6 +9,8 @@ import {
   type RawDoc,
 } from '../core/doc/raw-doc';
 
+import { sliceResetFns } from '.';
+
 export interface AppSliceState {
   doc: RawDoc;
   currentTime: number;
@@ -120,100 +122,103 @@ export const createAppSlice: StateCreator<
   [],
   [],
   AppSliceState & AppSliceAction
-> = (set, get) => ({
-  ...initialState,
+> = (set, get) => (
+  sliceResetFns.add(() => set(initialState)),
+  {
+    ...initialState,
 
-  updateSnapshot(index, snapshot) {
-    set((state) => {
-      const snapshots = updateArrayAt(state.doc.snapshots, index, snapshot);
-      const newDoc = {
-        ...state.doc,
-        snapshots,
-      };
+    updateSnapshot(index, snapshot) {
+      set((state) => {
+        const snapshots = updateArrayAt(state.doc.snapshots, index, snapshot);
+        const newDoc = {
+          ...state.doc,
+          snapshots,
+        };
 
-      return reviseStateCurrentTime({
-        doc: newDoc,
-        currentTime: state.currentTime,
+        return reviseStateCurrentTime({
+          doc: newDoc,
+          currentTime: state.currentTime,
+        });
       });
-    });
-  },
+    },
 
-  updateDocProperties(doc) {
-    set((state) => ({
-      doc: {
-        ...state.doc,
-        ...doc,
-      },
-    }));
-  },
+    updateDocProperties(doc) {
+      set((state) => ({
+        doc: {
+          ...state.doc,
+          ...doc,
+        },
+      }));
+    },
 
-  setCurrentTime(currentTime) {
-    const clampCurrentTime = clamp(currentTime, 0, getSumDuration(get().doc));
-    set((state) =>
-      reviseStateCurrentTime({
-        currentTime: clampCurrentTime,
-        doc: state.doc,
-      }),
-    );
-  },
-
-  gotoSnapshot(index) {
-    set((state) => {
-      const newCurrentTime = getSumDuration(state.doc, index);
-
-      return reviseStateCurrentTime({
-        currentTime: newCurrentTime,
-        doc: state.doc,
-      });
-    });
-  },
-
-  duplicateSnapshot(index) {
-    set((state) => {
-      const snapshot = state.doc.snapshots[index];
-      const newSnapshot = {
-        ...snapshot,
-        id: String(Date.now()),
-      };
-      const snapshots = updateArrayAt(
-        state.doc.snapshots,
-        index + 1,
-        newSnapshot,
+    setCurrentTime(currentTime) {
+      const clampCurrentTime = clamp(currentTime, 0, getSumDuration(get().doc));
+      set((state) =>
+        reviseStateCurrentTime({
+          currentTime: clampCurrentTime,
+          doc: state.doc,
+        }),
       );
-      const newDoc = {
-        ...state.doc,
-        snapshots,
-      };
-      const newCurrentTime = getSumDuration(state.doc, index + 1);
+    },
 
-      return reviseStateCurrentTime({
-        doc: newDoc,
-        playing: false,
-        currentTime: newCurrentTime,
+    gotoSnapshot(index) {
+      set((state) => {
+        const newCurrentTime = getSumDuration(state.doc, index);
+
+        return reviseStateCurrentTime({
+          currentTime: newCurrentTime,
+          doc: state.doc,
+        });
       });
-    });
-  },
+    },
 
-  deleteSnapshot(index) {
-    set((state) => {
-      const snapshots = removeArrayAt(state.doc.snapshots, index);
+    duplicateSnapshot(index) {
+      set((state) => {
+        const snapshot = state.doc.snapshots[index];
+        const newSnapshot = {
+          ...snapshot,
+          id: String(Date.now()),
+        };
+        const snapshots = updateArrayAt(
+          state.doc.snapshots,
+          index + 1,
+          newSnapshot,
+        );
+        const newDoc = {
+          ...state.doc,
+          snapshots,
+        };
+        const newCurrentTime = getSumDuration(state.doc, index + 1);
 
-      const newDoc = {
-        ...state.doc,
-        snapshots,
-      };
-
-      return reviseStateCurrentTime({
-        doc: newDoc,
-        currentTime: state.currentTime,
+        return reviseStateCurrentTime({
+          doc: newDoc,
+          playing: false,
+          currentTime: newCurrentTime,
+        });
       });
-    });
-  },
+    },
 
-  setPlaying(playing) {
-    set({ playing });
-  },
-});
+    deleteSnapshot(index) {
+      set((state) => {
+        const snapshots = removeArrayAt(state.doc.snapshots, index);
+
+        const newDoc = {
+          ...state.doc,
+          snapshots,
+        };
+
+        return reviseStateCurrentTime({
+          doc: newDoc,
+          currentTime: state.currentTime,
+        });
+      });
+    },
+
+    setPlaying(playing) {
+      set({ playing });
+    },
+  }
+);
 
 // reorderSnapshots: (newOrder: number[]) => void;
 // reorderSnapshots(newOrder: number[]) {

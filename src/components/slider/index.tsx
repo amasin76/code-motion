@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Divider from '@/components/ui/Divider';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { DocSnapshot, getSnapshotAtTime } from '@/core/doc/raw-doc';
-import { useStore } from '@/store';
+import { resetAllSlices, useStore } from '@/store';
 
 function Slider() {
   const [items, setItems] = useState([1, 2, 3]);
@@ -108,7 +108,8 @@ function SlideActions({ snapshots }: SlideActionsProps) {
       <Button
         className="grow rounded px-3"
         variant={'secondary'}
-        title="Delete All"
+        title="Factory reset"
+        onClick={() => resetAllSlices()}
       >
         <RotateCcwIcon className="w-5 bg-slate-800 text-slate-400" />
       </Button>
