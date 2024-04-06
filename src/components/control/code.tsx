@@ -1,4 +1,6 @@
+import { langNames } from '@uiw/codemirror-extensions-langs';
 import { CameraIcon } from 'lucide-react';
+import { useStore } from '@/store';
 import { mirrorThemes, useCodeEditorStore } from '@/store/code-control';
 import { captureScreenShot } from '@/utils/screenshot';
 
@@ -19,10 +21,19 @@ export function CodeTab() {
     captureScreenShot('editor-window', 'png', 'transparent');
   };
 
+  const { doc, updateDocProperties } = useStore((state) => ({
+    doc: state.doc,
+    updateDocProperties: state.updateDocProperties,
+  }));
   const { codeFontSize, setCodeFontSize } = useCodeEditorStore();
 
   const handleFontSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCodeFontSize(Number(e.target.value));
+  };
+
+  const handleLanguageChange = (selectedLanguage) => {
+    const updatedDoc = { ...doc, language: selectedLanguage };
+    updateDocProperties(updatedDoc);
   };
 
   return (
@@ -54,7 +65,7 @@ export function CodeTab() {
       </li>
       <li>
         <Label>themes</Label>
-        <Select disabled>
+        <Select>
           <SelectTrigger>
             <SelectValue />
           </SelectTrigger>
@@ -63,6 +74,26 @@ export function CodeTab() {
               {Object.keys(mirrorThemes).map((theme, idx) => (
                 <SelectItem key={idx} value={theme}>
                   {mirrorThemes[theme as keyof typeof mirrorThemes]}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </li>
+      <li>
+        <Label>language</Label>
+        <Select
+          defaultValue={doc.language}
+          onValueChange={handleLanguageChange}
+        >
+          <SelectTrigger>
+            <SelectValue defaultValue={doc.language} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {langNames.map((language, index) => (
+                <SelectItem key={index} value={language}>
+                  {language}
                 </SelectItem>
               ))}
             </SelectGroup>
