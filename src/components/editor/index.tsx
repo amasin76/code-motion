@@ -15,8 +15,6 @@ function EditorWindow() {
     updateSnapshot: state.updateSnapshot,
   }));
 
-  const deleteSnapshot = useStore((state) => state.deleteSnapshot);
-
   const [currentSnapshotIndex] = getSnapshotAtTime(doc, currentTime);
 
   const currentSnapShot = doc?.snapshots[currentSnapshotIndex];
@@ -37,9 +35,23 @@ function EditorWindow() {
       defaultValue="editor"
       className="m-auto flex h-full max-h-[40rem] max-w-[60rem] flex-col rounded-lg shadow-[10px_32px_200px_0px_#3182ce55] dark:bg-zinc-900"
     >
-      <div className="z-10 grid h-9 grid-cols-3 items-center rounded-t-lg pr-4">
-        <div>
-          <TabsList className="z-50 h-fit gap-2 bg-zinc-800">
+      <div className="relative z-10 flex min-h-10 items-center justify-between rounded-t-lg shadow-[rgba(0,0,15,0.3)_0px_5px_8px_0px]">
+        <div className="flex pl-2">
+          <button className="mr-2 h-3 w-3 rounded-full bg-red-400"></button>
+          <button className="mr-2 h-3 w-3 rounded-full bg-yellow-400"></button>
+          <button className="h-3 w-3 rounded-full bg-green-400"></button>
+        </div>
+        <div className="absolute right-[42%] text-gray-400">
+          <input
+            id="file-name"
+            className="w-full bg-transparent text-center text-[12px] focus:border-none focus:outline-none"
+            defaultValue="Code.tsx"
+            type="text"
+            spellCheck="false"
+          />
+        </div>
+        <div data-html2canvas-ignore="true">
+          <TabsList className="float-right ml-auto gap-2 bg-zinc-800">
             <TabsTrigger value="editor" className="flex gap-2">
               <CodeIcon className="w-5" /> Editor
             </TabsTrigger>
@@ -48,28 +60,9 @@ function EditorWindow() {
             </TabsTrigger>
           </TabsList>
         </div>
-        <div className="inline-flex items-center justify-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-400 ring-gray-800">
-          <input
-            className="bg-transparent text-center focus:border-none focus:outline-none"
-            defaultValue="Code.tsx"
-            type="text"
-            spellCheck="false"
-          />
-        </div>
-        <div className="flex justify-end">
-          <button className="mr-2 h-3 w-3 rounded-full bg-yellow-400"></button>
-          <button className="mr-2 h-3 w-3 rounded-full bg-green-400"></button>
-          <button
-            className="h-3 w-3 rounded-full bg-red-400"
-            onClick={() => {
-              +currentSnapShot.id > 1 &&
-                deleteSnapshot(+currentSnapShot.id - 1);
-            }}
-          ></button>
-        </div>
       </div>
-      <div className="flex-grow px-1 pb-1">
-        <TabsContent value="editor" className="h-full">
+      <div className="h-full px-1 pb-1">
+        <TabsContent value="editor" className="mt-0 h-full">
           <Editor
             value={currentSnapShot?.code || ''}
             language={doc.language}
@@ -77,7 +70,7 @@ function EditorWindow() {
             onChange={handleCodeUpdate}
           />
         </TabsContent>
-        <TabsContent value="preview">
+        <TabsContent value="preview" className="mt-0">
           <Preview />
         </TabsContent>
       </div>

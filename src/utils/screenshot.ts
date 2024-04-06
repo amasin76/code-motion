@@ -6,7 +6,7 @@ export function captureScreenShot(
   elementId: string,
   fileType: string,
   backgroundColor: string,
-  _fileName = dateFilename()
+  _fileName = dateFilename(),
 ): void {
   const element = document.getElementById(elementId);
   if (!element) {
@@ -16,6 +16,8 @@ export function captureScreenShot(
   html2canvas(element, {
     backgroundColor: backgroundColor,
     allowTaint: true,
+    width: element.clientWidth,
+    height: element.clientHeight,
   })
     .then((canvas) => {
       const image = canvas.toDataURL('image/' + fileType);
