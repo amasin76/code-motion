@@ -50,7 +50,7 @@ export function VideoTab() {
           onChange={handleFrameRateChange}
         />
       </li>
-      <li>
+      <li className="hidden">
         <Label htmlFor="slide-duration" title="second">
           slide duration <sup>s</sup>
         </Label>

@@ -50,7 +50,7 @@ export function CodeTab() {
           onChange={handleFontSizeChange}
         />
       </li>
-      <li>
+      <li className="hidden">
         <Label htmlFor="tab-size">
           tab-size <sup>char</sup>
         </Label>
@@ -63,7 +63,7 @@ export function CodeTab() {
           disabled
         />
       </li>
-      <li>
+      <li className="hidden">
         <Label>themes</Label>
         <Select>
           <SelectTrigger>
