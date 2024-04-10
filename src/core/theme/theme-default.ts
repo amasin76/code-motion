@@ -15,7 +15,7 @@ const defaultTheme: ThemeData = {
     {
       types: ['punctuation'],
       style: {
-        color: '#c5c8c6',
+        color: '#8C8C8C',
       },
     },
     {
