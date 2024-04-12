@@ -1,56 +1,43 @@
-import { LanguageName } from '@uiw/codemirror-extensions-langs';
 import memoize from 'memoizerific';
-import Prism, { type TokenStream } from 'prismjs';
+import { BundledLanguage, codeToTokens, ThemedToken } from 'shiki';
 import { isSpaces, splitToTokens } from '@/utils/string';
 
-interface RawToken {
+export interface BaseToken {
   value: string;
-  types: string[];
+  color: string | undefined;
 }
 
-export interface Token extends RawToken {
+export interface Token extends BaseToken {
   invisible: boolean;
 }
 
-function createTokens(code: string, language: LanguageName): Token[] {
-  const rawTokens = flattenPrismTokens(
-    Prism.tokenize(code, Prism.languages[language]),
+async function createTokens(
+  code: string,
+  language: BundledLanguage,
+): Promise<Token[]> {
+  const { tokens } = await codeToTokens(code, {
+    lang: language,
+    theme: 'tokyo-night',
+  });
+
+  console.log(language);
+
+  const baseTokens = flattenShikiTokens(tokens);
+  return processTokensWithAttrs(baseTokens);
+}
+
+function flattenShikiTokens(tokens: ThemedToken[][]): BaseToken[] {
+  return tokens.flatMap((tokens, i, arr) =>
+    tokens
+      .map((token) => ({
+        value: token.content,
+        color: token.color,
+      }))
+      .concat(i < arr.length - 1 ? { value: '\n', color: 'transparent' } : []),
   );
-
-  return processRawTokens(rawTokens);
 }
 
-function flattenPrismTokens(tokens: TokenStream, types?: string[]): RawToken[] {
-  if (Array.isArray(tokens)) {
-    return tokens.flatMap((token) => flattenPrismTokens(token, types));
-  }
-
-  if (typeof tokens === 'string') {
-    return [
-      {
-        value: tokens,
-        types: [],
-      },
-    ];
-  }
-
-  const joinedTypes = types?.includes(tokens.type)
-    ? types
-    : [...(types ?? []), tokens.type];
-
-  if (typeof tokens.content === 'string') {
-    return [
-      {
-        value: tokens.content,
-        types: joinedTypes,
-      },
-    ];
-  }
-
-  return flattenPrismTokens(tokens.content, joinedTypes);
-}
-
-function processRawTokens(baseTokens: RawToken[]): Token[] {
+function processTokensWithAttrs(baseTokens: BaseToken[]) {
   const tokens: Token[] = [];
 
   for (const token of baseTokens) {

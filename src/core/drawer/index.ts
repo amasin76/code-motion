@@ -35,7 +35,7 @@ export class DocumentDrawer {
 
   constructor(
     public readonly canvas: HTMLCanvasElement,
-    public readonly ratio = 0.745
+    public readonly ratio = 0.745,
   ) {
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('Failed to get canvas context');
@@ -43,10 +43,10 @@ export class DocumentDrawer {
     this.ctx = ctx;
   }
 
-  setDoc(rawDoc: RawDoc) {
+  async setDoc(rawDoc: RawDoc) {
     if (rawDoc === this.doc?.raw) return;
     this.tokenPositionsList = [];
-    this.doc = createDoc(rawDoc);
+    this.doc = await createDoc(rawDoc);
     this.currentTime = -1;
     this.canvas.width = rawDoc.width * this.ratio;
     this.canvas.height = rawDoc.height * this.ratio;
@@ -100,7 +100,7 @@ export class DocumentDrawer {
     if (
       !isOffsetTimeInTransition(
         doc.raw.snapshots[snapshotIndex1],
-        offsetTime1
+        offsetTime1,
       ) &&
       !isOffsetTimeInTransition(doc.raw.snapshots[snapshotIndex2], offsetTime2)
     ) {
@@ -185,23 +185,18 @@ export class DocumentDrawer {
     position: Position,
     doc: Doc,
     opacity: number,
-    globalOffset: Position = { x: 0, y: 0 }
+    globalOffset: Position = { x: 0, y: 0 },
   ) {
     const { ctx, theme } = this;
     const { raw: rawDoc } = doc;
 
     ctx.save();
 
-    const tokenStyle = theme.getTypesStyle(token.types);
+    ctx.fillStyle = token.color || 'FF0000';
 
-    if (tokenStyle.color) {
-      ctx.fillStyle = tokenStyle.color;
-    }
-
-    ctx.globalAlpha = (tokenStyle.opacity ?? 1) * opacity;
+    ctx.globalAlpha = 1 * opacity;
 
     ctx.font = getFontProperty({
-      ...tokenStyle,
       fontFace: theme.data.fontFace,
       fontSize: rawDoc.fontSize * this.ratio,
     });
@@ -210,7 +205,7 @@ export class DocumentDrawer {
       ctx.fillText(
         token.value,
         (globalOffset.x + position.x) * this.ratio,
-        (globalOffset.y + position.y + rawDoc.lineHeight / 2) * this.ratio
+        (globalOffset.y + position.y + rawDoc.lineHeight / 2) * this.ratio,
       );
     }
 
@@ -248,7 +243,7 @@ export class DocumentDrawer {
     const { tokens } = snapshots[snapshotIndex];
     this.ctx.translate(
       padding.left * this.ratio,
-      (padding.top - minScrollTop) * this.ratio
+      (padding.top - minScrollTop) * this.ratio,
     );
 
     for (let i = 0; i < tokens.length; i++) {
@@ -282,7 +277,7 @@ export class DocumentDrawer {
         padding.left * this.ratio,
         (padding.top -
           applyTransition(progress, leftMinScrollTop, rightMinScrollTop)) *
-          this.ratio
+          this.ratio,
       );
 
       const mutation = doc.transitions[leftSnapshotIndex];
@@ -292,7 +287,7 @@ export class DocumentDrawer {
         if (leftIndex == null) {
           assert(
             rightIndex,
-            'leftIndex & rightIndex cannot be null at same time'
+            'leftIndex & rightIndex cannot be null at same time',
           );
           // token add
           const token = right[rightIndex];
@@ -302,7 +297,7 @@ export class DocumentDrawer {
             token,
             position,
             doc,
-            applyTransition(transitionState.inProgress, 0, 1)
+            applyTransition(transitionState.inProgress, 0, 1),
           );
         } else if (rightIndex == null) {
           // token delete
@@ -312,7 +307,7 @@ export class DocumentDrawer {
             token,
             position,
             doc,
-            applyTransition(transitionState.outProgress, 1, 0)
+            applyTransition(transitionState.outProgress, 1, 0),
           );
         } else {
           // token move
@@ -327,10 +322,10 @@ export class DocumentDrawer {
             applyPositionTransition(
               transitionState.moveProgress,
               leftPosition,
-              rightPosition
+              rightPosition,
             ),
             doc,
-            1
+            1,
           );
         }
       }

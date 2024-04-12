@@ -17,14 +17,17 @@ export interface Doc {
   transitions: MovMutation[];
 }
 
-export function createDoc(raw: RawDoc): Doc {
-  const snapshots = raw.snapshots.map<Snapshot>((snapshot) => ({
-    tokens: memoizedCreateTokens(snapshot.code, raw.language),
-    linesCount: getLinesCount(snapshot.code),
-  }));
+export async function createDoc(raw: RawDoc): Promise<Doc> {
+  const snapshots = await Promise.all(
+    raw.snapshots.map(async (snapshot) => ({
+      // @ts-expect-error: temp until remove @uiw/langs
+      tokens: await memoizedCreateTokens(snapshot.code, raw.language),
+      linesCount: getLinesCount(snapshot.code),
+    })),
+  );
 
   const transitions = createArray(snapshots.length - 1, (index) =>
-    calcTokenDiffs(snapshots[index].tokens, snapshots[index + 1].tokens)
+    calcTokenDiffs(snapshots[index].tokens, snapshots[index + 1].tokens),
   );
 
   return {

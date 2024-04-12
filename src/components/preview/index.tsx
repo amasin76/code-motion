@@ -29,8 +29,10 @@ export default function Preview() {
   }, []);
 
   useEffect(() => {
-    drawerRef.current?.setDoc(doc);
-    drawerRef.current?.render(currentTime);
+    (async function () {
+      await drawerRef.current?.setDoc(doc);
+      drawerRef.current?.render(currentTime);
+    })();
   }, [doc, currentTime]);
 
   return (

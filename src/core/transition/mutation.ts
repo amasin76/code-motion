@@ -1,6 +1,6 @@
 import { diffArrays } from 'diff';
 
-import { isTokenWhitespace, type Token } from '../tokenize/index';
+import { isTokenWhitespace, Token } from '../tokenize';
 
 export interface TokenDiff {
   leftIndex: number | null;
@@ -15,9 +15,11 @@ export interface MovMutation {
 
 export function calcTokenDiffs(left: Token[], right: Token[]): MovMutation {
   const diffResult = diffArrays(left, right, {
-    comparator: (leftToken, rightToken) =>
-      (isTokenWhitespace(leftToken) && isTokenWhitespace(rightToken)) ||
-      leftToken.value === rightToken.value,
+    comparator: (left, right) => {
+      if (isTokenWhitespace(left) && isTokenWhitespace(right)) return true;
+
+      return left.value === right.value;
+    },
   });
 
   const diffs: TokenDiff[] = [];
@@ -25,23 +27,20 @@ export function calcTokenDiffs(left: Token[], right: Token[]): MovMutation {
   let rightIndex = 0;
 
   for (const group of diffResult) {
-    const existedInLeft = group.added === undefined;
-    const existedInRight = group.removed === undefined;
+    const count = group.count ?? 0;
+    const existedInLeft = group.added == null;
+    const existedInRight = group.removed == null;
 
     diffs.push(
       ...group.value.map((_token, idx) => ({
         leftIndex: existedInLeft ? leftIndex + idx : null,
         rightIndex: existedInRight ? rightIndex + idx : null,
-      }))
+      })),
     );
 
-    leftIndex += existedInLeft ? group.count || 0 : 0;
-    rightIndex += existedInRight ? group.count || 0 : 0;
+    if (existedInLeft) leftIndex += count;
+    if (existedInRight) rightIndex += count;
   }
 
-  return {
-    left,
-    right,
-    diffs,
-  };
+  return { left, right, diffs };
 }
